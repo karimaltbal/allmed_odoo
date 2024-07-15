@@ -1,0 +1,1 @@
+# allmed_odoo
