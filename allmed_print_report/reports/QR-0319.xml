@@ -1,0 +1,219 @@
+<odoo>
+    <data>
+        <template id="QR_0319_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                        <!--link of style css-->
+                        <link rel="stylesheet" href="/allmed_print_report/static/src/css/style_new.css" />
+
+                        
+                            <div class="row header mb-3">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="img-content" rowspan="3">
+                                                        <img src="/allmed_print_report/static/src/img/allmed.png" alt="...loding" />
+                                                    </td>
+                                                    <td colspan="2">Allmed Middle East</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Department </td>
+                                                    <td>Supply Chain</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Form</td>
+                                                    <td>Order Form</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p >Related Documents WI.141</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Order No.</td>
+                                                    <td></td>
+                                                    <td>Order Date</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td></td>
+                                                    <td>Delivery Term</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Delivery Date </td>
+                                                    <td></td>
+                                                    <td>Currency</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Payment Term</td>
+                                                    <td colspan="3"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--Start Main Header Page -->
+                            <div class="row mb-1">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <h4 class="mb-1">Bill of materials:</h4>
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr class="text-center">
+                                                    <td>No.</td>
+                                                    <td>Item Code</td>
+                                                    <td>Description</td>
+                                                    <td>Unit</td>
+                                                    <td>Quantity</td>
+                                                    <td>Unit Price</td>
+                                                    <td>Total</td>
+                                                </tr>
+                                                <t t-foreach="o.move_raw_ids" t-as="ele">
+                                                    <tr>
+                                                        <td>
+                                                            
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_id.default_code" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_id.name" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_uom" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_uom_qty" />
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                </t>
+                                                <tr>
+                                                    <td class="text-center" colspan="3">Total</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <p class="mb-0">Approved by:</p>
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Designated Authority</td>
+                                                    <td>Name</td>
+                                                    <td>Signature</td>
+                                                    <td>Date</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Procurement Sr. Supervisor </td>
+                                                    <td>Mr. Ayman Ragab</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Supply Chain Sr. Manager  </td>
+                                                    <td>Mr. Waleed Mohamed</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Managing Director </td>
+                                                    <td>Mr. Sayed Nasr</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- <p class="text-center">THIS PURCHASE ORDER IS NOT VALID AND IS NOT TO BE ACCEPTED IF NOT SIGNED BY ALL SIGNATORIES ABOVE.</p> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr class="text-center">
+                                                    <td>Notes</td>
+                                                    <td>
+                                                        The Seller accepts the terms stated above and declares its consent to the Buyer’s Terms and Conditions, which is an integral part of this “Order Form”. Partial Shipment and/or transhipment of the above goods shall be permitted- <span class="t-b">This Order Needed to be Shipped on</span> 
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> -->
+
+
+                            <div class="row footer">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <p class="text-center mb-0">All copyright© Reserved to Allmed Group</p>
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr class="text-center">
+                                                    <td>Ref. no.</td>
+                                                    <td>Rev. no.</td>
+                                                    <td>Page 1 of 2</td>
+                                                    <td>Issue Date</td>
+                                                    <td>Effective Date </td>
+                                                </tr>
+                                                <tr class="text-center">
+                                                    <td>QR.0319</td>
+                                                    <td>10</td>
+                                                    <td>T005</td>
+                                                    <td>29.01.2024</td>
+                                                    <td>29.01.2024</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div> 
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="action_QR_0319_report"
+                model="mrp.production"
+                name="allmed_print_report.QR_0319_report"
+                file="allmed_print_report.QR_0319_report"
+                string="QR"
+                report_type="qweb-pdf"/>
+
+    </data>
+</odoo>

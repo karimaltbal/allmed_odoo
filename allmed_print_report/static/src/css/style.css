@@ -1,0 +1,24 @@
+.t-center{text-align: center !important;}
+.t-b{font-weight: bold; }
+
+
+.m-b18{margin-bottom: 18px;}
+.m-b100{margin-bottom: 100px;}
+
+
+
+.b-none{border: 1px solid transparent; }
+.b-none-only{border: 1px solid transparent; border-left: 1px solid black; }
+
+/****************************/
+.page{ direction: rtl; padding: 0px 20px; text-align: right;}
+.main-table{ width: 100%;}
+.page table th, td { padding: 10px; border: 1px solid #000000; }
+
+.page .img-content{ text-align: center; width: 100px;}
+.page .img-content img{ width: 100px;}
+
+.page footer, .page header{
+    direction: rtl;
+    text-align: right;
+}

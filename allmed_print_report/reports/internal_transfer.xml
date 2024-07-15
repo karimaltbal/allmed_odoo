@@ -1,0 +1,226 @@
+<odoo>
+    <data>
+
+        <template id="Internal_transfer_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                            <!--link of style css-->
+                            <link rel="stylesheet" href="/allmed_print_report/static/src/css/style.css"/>
+
+                                <div class="row header" style="direction: rtl; font-size: 15px;">
+                                    <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered" style="text-align: right;">
+                                        <tbody>
+                                            <tr>
+                                            <td class="img-content" style="text-align: right; width:120px; padding: 2px;" rowspan="3">
+                                                <img style="width:120px; margin-top: 20%;" src="/allmed_print_report/static/src/img/allmed.png" alt="...loding"/>
+                                            </td>
+                                            <td style="padding: 2px;" colspan="2">شركة أولميد ميدل ايست</td>
+                                            </tr>
+                                            <tr>
+                                            <td style="padding: 2px;">القسم</td>
+                                            <td style="padding: 2px;">المخازن</td>
+                                            </tr>
+                                            <tr>
+                                            <td style="padding: 2px;">نموذج</td>
+                                            <td style="padding: 2px;">إذن تحويل</td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+
+                                        <p style="text-align: right;">
+                                        <span>الوثيقة المرتبطة</span>
+                                        WI.022-WI.103-WI.105-WI.110-WI.115
+                                        </p>
+                                    </div>
+                                    </div>
+                                </div>
+
+                            <!--Start Main Header Page -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <div class="row">
+                                            <div style="margin-left: 440px;">
+                                                <p>الجهة أو القسم :  
+                                                    <span t-field="o.location_dest_id"/>
+                                                </p>
+                                            </div>
+                                            <div>
+                                                <p>مسلسل:
+                                                    <span t-field="o.name"/>
+                                                </p>
+                                                <p>التاريخ : 
+                                                    <span t-field="o.scheduled_date"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row" style="height: 750px; font-size: 15px;">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table style="padding: 0px;" class="main-table">
+                                            <tbody>
+                                                <tr class="t-b t-center">
+                                                    <td style="padding: 0px;" rowspan="2">م</td>
+                                                    <td style="padding: 0px;" rowspan="2">رقم اللوط</td>
+                                                    <td style="padding: 0px;" rowspan="2">الكود</td>
+                                                    <td style="padding: 0px;" rowspan="2">اسم الصنف</td>
+                                                    <td style="padding: 0px;" rowspan="2">الوحدة</td>
+                                                    <td style="padding: 0px;" colspan="2">الكمية</td>
+                                                    <td style="padding: 0px;" colspan="2">سعر الوحدة</td>
+                                                    <td style="padding: 0px;" colspan="2">القيمة</td>
+                                                    <td style="padding: 0px;" rowspan="2">الرصيد الكمية</td>
+                                                    <td style="padding: 0px;" rowspan="2">مركز التكلفة</td>
+                                                </tr>
+                                                <tr style=" font-size: 12px;" class="">
+                                                    <td >المطلوبة</td>
+                                                    <td>المنصرفة</td>
+                                                    <td>قرش</td>
+                                                    <td>جنية</td>
+                                                    <td>قرش</td>
+                                                    <td>جنية</td>
+                                                </tr>
+
+                                                <t t-set="counter" t-value="1"/>
+                                                <t t-set="total_qty" t-value="0"/>
+                                                <t t-foreach="o.move_line_ids_without_package" t-as="ele">
+                                                    <tr>
+                                                        <td t-esc="counter"/>
+                                                        <td/>
+                                                        <td>
+                                                            <span t-field="ele.product_id.default_code"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_id.name"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_uom_id"/>
+                                                        </td>
+                                                        <td>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.qty_done"/>
+                                                        </td>
+                                                        <td/>
+                                                        <td/>
+                                                        <td/>
+                                                        <td/>
+                                                        <td/>
+                                                        <td/>
+                                                    </tr>
+                                                    <t t-set="counter" t-value="counter + 1"/>
+                                                    <t t-set="total_qty" t-value="total_qty + ele.x_studio_qty_available"/>
+                                                </t>
+                                                <tr>
+                                                    <td colspan="11">
+                                                    الاجمالى
+                                                    <span  t-esc="o.num2words(value=total_qty, 
+                                                                lang='ar_EG',                                              
+                                                                main_unit='جنيها',sub_unit='قرشا',     
+                                                                split_value='و',end_value='مصريا لا غير')"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="total_qty"/>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="row m-b18">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>المسئول</td>
+                                                    <td>الاسم</td>
+                                                    <td>التوقيع</td>
+                                                    <td>التاريخ</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>المستلم</td>
+                                                    <td/>
+                                                    <td/>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td>امين المخزن</td>
+                                                    <td/>
+                                                    <td/>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td>مدير المخزن</td>
+                                                    <td/>
+                                                    <td/>
+                                                    <td/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <p class="t-center">All copyright© Reserved to Allmed Group</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                                <div class="row footer m-b18 text-center">
+                                    <div class="col-12">
+                                        <div class="main_header">
+                                            <table class="main-table table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Effective Date</td>
+                                                        <td>Issue Date</td>
+                                                        <td>صفحة 1 من 1</td>
+                                                        <td>رقم المراجعة</td>
+                                                        <td>رقم المرجع</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>01.01.2023</td>
+                                                        <td>13..11.2022</td>
+                                                        <td>T005</td>
+                                                        <td>06</td>
+                                                        <td>QR.0004</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        
+            <report
+                id="action_Internal_transfer_report"
+                model="stock.picking"
+                name="allmed_print_report.Internal_transfer_report"
+                file="allmed_print_report.Internal_transfer_report"
+                string="إذن تحويل"
+                report_type="qweb-pdf"/>
+        
+        </data>
+</odoo>

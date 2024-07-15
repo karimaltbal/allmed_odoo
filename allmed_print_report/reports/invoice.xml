@@ -1,0 +1,117 @@
+<odoo>
+    <data>
+        <template id="invoice_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                        <!--link of style css-->
+                        <link rel="stylesheet" href="/allmed_print_report/static/src/css/style_new.css" />
+
+                        
+                            <div class="row header mb-3">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="img-content" rowspan="3">
+                                                        <img src="/allmed_print_report/static/src/img/allmed.png" alt="...loding" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Conigned To: </td>
+                                                    <td colspan="2">Sold To:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Commercial Invoice No:  </td>
+                                                    <td>Date:</td>
+                                                    <td>Page No:</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="2">Payment Terms:</td>
+                                                    <td colspan="3">Shipment:</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>code</td>
+                                                    <td>Description</td>
+                                                    <td>Quantity</td>
+                                                    <td>price</td>
+                                                    <td>total</td>
+                                                </tr>
+                                                <t t-foreach="o.order_line" t-as="ele">
+                                                    <tr>
+                                                        <td>
+                                                            <span t-field="ele.product_id" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.name" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_uom_qty" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.price_unit" />
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.price_subtotal" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>Bank</td>
+                                                    <td>Currency</td>
+                                                    <td>Destination</td>
+                                                    <td>Subtotal:</td>
+                                                    <td>
+                                                        <span t-field="o.amount_total" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>Freight:</td>
+                                                    <td>0.00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">Note</td>
+                                                    <td>Total:</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div> 
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="action_invoice_report"
+                model="sale.order"
+                name="allmed_print_report.invoice_report"
+                file="allmed_print_report.invoice_report"
+                string="Invoice"
+                report_type="qweb-pdf"/>
+
+    </data>
+</odoo>

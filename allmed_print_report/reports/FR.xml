@@ -1,0 +1,141 @@
+<odoo>
+    <data>
+        <template id="FR_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                        <!--link of style css-->
+                        <link rel="stylesheet" href="/allmed_print_report/static/src/css/style_new.css" />
+
+                        
+                            <div class="row header mb-3">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="img-content" rowspan="3">
+                                                        <img src="/allmed_print_report/static/src/img/allmed.png" alt="...loding" />
+                                                    </td>
+                                                    <td colspan="2">Allmed Middle East</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Department </td>
+                                                    <td>Planning</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Drawing </td>
+                                                    <td>Fresenius [AV/GN]</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="1">Description</td>
+                                                    <td colspan="5">Bill of Materials </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Code </td>
+                                                    <td></td>
+                                                    <td>Approved </td>
+                                                    <td></td>
+                                                    <td>Lot No. </td>
+                                                    <td>Planning</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--Start Main Header Page -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <h4 class="mb-1">Bill of materials:</h4>
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr class="text-center">
+                                                    <td>Components</td>
+                                                    <td># /SET</td>
+                                                    <td>Item Code/Supplier</td>
+                                                    <td>Lot Number</td>
+                                                    <td>Qty.</td>
+                                                </tr>
+                                                <tr class="b-c">
+                                                    <td colspan="5">AV/GN</td>
+                                                </tr>
+                                                <t t-foreach="o.move_raw_ids" t-as="ele">
+                                                    <tr>
+                                                        <td>
+                                                            <span t-field="ele.product_id" />
+                                                        </td>
+                                                        <td></td>
+                                                        <td>
+                                                            <span t-field="ele.x_studio_vendor_code" />
+                                                        </td>
+                                                        <td></td>
+                                                        <td>
+                                                            <span t-field="ele.quantity_done" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row footer">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <p class="text-center mb-0">All copyright© Reserved to Allmed Group</p>
+                                        <table class="main-table table table-bordered">
+                                            <tbody>
+                                                <tr class="text-center">
+                                                    <td>Ref. no.</td>
+                                                    <td>Rev. no.</td>
+                                                    <td>Page 1 of 2</td>
+                                                    <td>Issue Date</td>
+                                                    <td>Effective Date </td>
+                                                </tr>
+                                                <tr class="text-center">
+                                                    <td>FR.0105</td>
+                                                    <td>04</td>
+                                                    <td>T051</td>
+                                                    <td>27.02.2023</td>
+                                                    <td>27.02.2023</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div> 
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="action_FR_report"
+                model="mrp.production"
+                name="allmed_print_report.FR_report"
+                file="allmed_print_report.FR_report"
+                string="FR"
+                report_type="qweb-pdf"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,214 @@
+<odoo>
+    <data>
+        <template id="receipt_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page">
+                        <!--link of style css-->
+                        <link rel="stylesheet" href="/allmed_print_report/static/src/css/style.css"/>
+
+                            <div class="row header" style="direction: rtl; font-size: 16px;">
+                                <div class="col-12">
+                                <div class="main_header">
+                                    <table class="main-table table table-bordered" style="text-align: right;">
+                                    <tbody>
+                                        <tr>
+                                        <td class="img-content" style="text-align: right; width:120px; padding: 2px;" rowspan="3">
+                                                <img style="width:120px; margin-top: 20%;" src="/allmed_print_report/static/src/img/allmed.png" alt="...loding"/>
+                                            </td>
+                                        <td style="padding: 2px;" colspan="2">شركة أولميد ميدل ايست</td>
+                                        </tr>
+                                        <tr>
+                                        <td style="padding: 2px;">القسم</td>
+                                        <td style="padding: 2px;">المخازن</td>
+                                        </tr>
+                                        <tr>
+                                        <td style="padding: 2px;">نموذج</td>
+                                        <td style="padding: 2px;">إذن إضافة </td>
+                                        </tr>
+                                    </tbody>
+                                    </table>
+
+                                    <p style="text-align: right;">
+                                      <span style="margin-left: 250px">
+                                        الوثيقة المرتبطة
+                                        WI.022- WI.103- WI.105- WI.110- WI.115
+                                      </span>
+                                      
+                                      <span>مسلسل :
+                                        <span t-field="o.name" />
+                                      </span>
+                                    </p>
+
+                                </div>
+                                </div>
+                            </div>
+
+                        <!--Start Main Header Page -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="main_header">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p>التاريخ :
+                                              <t t-esc="o.scheduled_date.strftime('%d-%m-%Y')" />
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p>إسم المورد:
+                                                <span t-field="o.partner_id" />
+                                            </p>
+                                        </div>
+                                        <div class="col-4">
+                                            <p>أمر توريد رقم :  
+                                                <span t-field="o.origin"/>
+                                            </p>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row" style="height: 850px;">
+                            <div class="col-12">
+                                <div class="main_header">
+                                    <table class="main-table">
+                                        <tbody>
+                                            <tr class="t-b t-center">
+                                                <td style="padding: 2px;" rowspan="2">رقم اللوط</td>
+                                                <td style="padding: 2px;" rowspan="2">الكود</td>
+                                                <td style="padding: 2px;" rowspan="2">اسم الصنف</td>
+                                                <td style="padding: 2px;" rowspan="2">الوحدة</td>
+                                                <td style="padding: 2px;" colspan="2">الكمية</td>
+                                                <td style="padding: 2px;" rowspan="2">الرصيد</td>
+                                                <td style="padding: 2px;" colspan="2">القيمة</td>
+                                            </tr>
+                                            <tr class="t-center">
+                                                <td style="padding: 2px;">الواردة</td>
+                                                <td style="padding: 2px;">المقبولة</td>
+                                                <td style="padding: 2px;">قرش</td>
+                                                <td style="padding: 2px;">جنيه</td>
+                                            </tr>
+
+                                            <t t-set="counter" t-value="1"/>
+                                            <t t-foreach="o.move_ids_without_package" t-as="ele">
+                                                <tr>
+                                                    <td t-esc="counter"/>
+                                                    <td>
+                                                        <span t-field="ele.product_id.default_code"/>
+                                                    </td>
+                                                    <td>
+                                                      <span t-field="ele.product_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                      <span t-field="ele.product_uom"/>
+                                                    </td>
+                                                    <td>
+                                                      <span t-field="ele.quantity_done"/>
+                                                        <!--<span t-field="o.x_studio_related_field_FFdSC"/>-->
+                                                    </td>
+                                                    <td>
+                                                      <span t-field="ele.quantity_done"/>
+                                                        <!--<span t-field="o.x_studio_guidance_2"/>-->
+                                                    </td>
+                                                    <td>
+                                                      <span t-field="ele.x_studio_qty_on_hand" />
+                                                    </td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <t t-set="counter" t-value="counter + 1"/>
+                                            </t>
+                                              <tr>
+                                                <td colspan="7">
+                                                  الاجمالى
+                                                </td>
+                                                <td></td>
+                                                <td></td>
+
+                                              </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row m-b18">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>المسئول</td>
+                                                    <td>الاسم</td>
+                                                    <td>التوقيع</td>
+                                                    <td>التاريخ</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>امين المخزن</td>
+                                                    <td/>
+                                                    <td/>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td>مدير المخزن</td>
+                                                    <td/>
+                                                    <td/>
+                                                    <td/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                        <p class="t-center">All copyright© Reserved to Allmed Group</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                <div class="row footer text-center">
+                                    <div class="col-12">
+                                        <div class="main_header">
+                                            <table class="main-table table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Effective Date</td>
+                                                        <td>Issue Date</td>
+                                                        <td>صفحة 1 من 1</td>
+                                                        <td>رقم المراجعة</td>
+                                                        <td>رقم المرجع</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>01.01.2023</td>
+                                                        <td>13..11.2022</td>
+                                                        <td>T005</td>
+                                                        <td>07</td>
+                                                        <td>QR.0005</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                    </div> 
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="action_receipt_report"
+                model="stock.picking"
+                name="allmed_print_report.receipt_report"
+                file="allmed_print_report.receipt_report"
+                string="إذن إضافة منتجات"
+                report_type="qweb-pdf"/>
+
+    </data>
+</odoo>

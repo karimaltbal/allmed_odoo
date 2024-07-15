@@ -1,0 +1,286 @@
+<odoo>
+    <data>
+        <template id="po_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page" style="font-size: 13px;">
+                            <!--link of style css-->
+                            <link rel="stylesheet" href="/allmed_print_report/static/src/css/style.css"/>
+
+
+                                <div class="row header" style="direction: rtl; font-size: 15px;">
+                                    <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered" style="text-align: right;">
+                                        <tbody>
+                                            <tr>
+                                            <td class="img-content" style="text-align: right; width:120px; padding: 2px;" rowspan="3">
+                                                <img style="width:120px; margin-top: 20%;" src="/allmed_print_report/static/src/img/allmed.png" alt="...loding"/>
+                                            </td>
+                                            <td style="padding: 2px;" colspan="2">شركة أولميد ميدل ايست</td>
+                                            </tr>
+                                            <tr>
+                                            <td style="padding: 2px;">القسم</td>
+                                            <td style="padding: 2px;">المشتريات</td>
+                                            </tr>
+                                            <tr>
+                                            <td style="padding: 2px;">نموذج</td>
+                                            <td style="padding: 2px;">امر التوريد</td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+
+                                        <p style="text-align: right;">
+                                        <span>الوثيقة المرتبطة</span>
+                                        WI.370
+                                        </p>
+                                    </div>
+                                    </div>
+                                </div>
+
+                            <!--Start Main Header Page -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <h2 class="t-center" style="font-size: 14px; font-weight: bold;">أمر التوريد رقم(<span t-field="o.name"/>)</h2>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                التاريخ <span t-field="o.date_planned"/>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                                                        <!--Start Main Header Page -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <div class="row">
+
+                                            <div class="col-12">
+                                                السادة: <span t-field="o.partner_id"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <div class="row">
+
+                                            <div class="col-6">
+                                              رجاء توريد الأصناف التالية:-
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row" style="margin-bottom: 10px; height: 530px; font-size: 16px;">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table">
+                                            <tbody>
+                                                <tr class="t-b t-center">
+                                                    <td style="padding: 3px;" rowspan="2">م</td>
+                                                    <td style="padding: 3px;" rowspan="2">أسم الصنف</td>
+                                                    <td style="padding: 3px;" rowspan="2">الوحدة</td>
+                                                    <td style="padding: 3px;" rowspan="2">الكمية </td>
+                                                    <td style="padding: 3px;" colspan="2">سعر الوحدة</td>
+                                                    <td style="padding: 3px;" colspan="2">القيمة</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ق</td>
+                                                    <td>جنية</td>
+                                                    <td>ق</td>
+                                                    <td>جنية</td>
+                                                </tr>
+
+                                                <t t-set="counter" t-value="1"/>
+                                                <t t-foreach="o.order_line" t-as="ele">
+                                                    <tr style="text-align: center;">
+                                                        <td t-esc="counter"/>
+                                                        <td>
+                                                            <span t-field="ele.product_id"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_uom"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_qty"/>
+                                                        </td>
+                                                        <td/>
+                                                        <td>
+                                                            <span t-field="ele.price_unit"/>
+                                                        </td>
+                                                        <td/>
+                                                        <td>
+                                                            <span t-field="ele.price_subtotal"/>
+                                                        </td>
+                                                    </tr>
+                                                    <t t-set="counter" t-value="counter + 1"/>
+                                                </t>
+
+                                                <tr>
+                                                    <td colspan="7">الاجمالى فقط
+                                                        <span  t-esc="o.num2words(value=json.loads(o.tax_totals_json)['amount_total'], 
+                                                                lang='ar_EG',                                              
+                                                                main_unit='جنيها',sub_unit='قرشا',     
+                                                                split_value='و',end_value='مصريا لا غير')"/>
+                                                    </td>
+                                                    <td>
+                                                    <t t-esc="json.loads(o.tax_totals_json)['amount_total']"/> 
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row " style="margin-bottom: 10px;">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table">
+                                            <tbody>
+                                                <tr class="t-b ">
+                                                    <td>
+                                                    <div>
+                                                        <p>مقر التسليم:
+....................................................................................................................................................................................
+                                                        </p>
+                                                        <p>شروط الدفع:
+....................................................................................................................................................................................
+                                                        </p>
+                                                        <p>تاريخ التوريد:
+....................................................................................................................................................................................
+                                                        </p>
+                                                        <div>
+                                                          اسلوب الشراء :
+                                                        <span class="ml-1">
+                                                            <input type="checkbox" id="myCheckbox"/>
+                                                            <label>أمر الشراء</label>                            
+                                                        </span>
+                                                        <span class="ml-1">
+                                                            <input type="checkbox" id="myCheckbox"/>
+                                                            <label>مناقصة</label>                            
+                                                        </span>
+                                                        <span class="ml-1">
+                                                            <input type="checkbox" id="myCheckbox"/>
+                                                            <label>ممارسة</label>                            
+                                                        </span>
+                                                        <span class="ml-1">
+                                                            <input type="checkbox" id="myCheckbox"/>
+                                                            <label>أخرى</label>                            
+                                                            <span>
+                                                                .................
+                                                            </span>
+                                                        </span>
+                                                        </div>
+                                                        <p>رقم طلب الشراء:
+....................................................................................................................................................................................                                                        </p>
+                                                    </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                            <div class="col-12">
+                                <div class="main_header">
+                                  <p class="mb-0 t-b">برجاء الإلتزام التام بالتعليمات والإرشادات </p>
+                                    <table class="main-table">
+                                        <tbody>
+                                            <tr class="t-b t-center">
+                                                <td>الاعتمادات</td>
+                                                <td>الإسم</td>
+                                                <td>التوقيع</td>
+                                                <td>التاريخ</td>
+                                            </tr>
+                                            <tr>
+                                                <td>مسئول المشتريات</td>
+                                                <td/>
+                                                <td/>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                            <td>مدير مصنع</td>
+                                            <td/>
+                                            <td/>
+                                            <td/>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="row">
+                                        <p class="col-6 t-b">تليفون:
+                                        38202871-38202550-38202551 
+                                        </p>
+                                        <p class="col-6 t-b">فاكس:
+                                        38202555-38202890
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                            
+                                <div class="row footer" style="text-align: center;">
+                                    <div class="col-12">
+                                        <div class="main_header">
+                                        <p>All copyright© Reserved to Allmed Group</p>
+
+                                            <table class="main-table table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>تاريخ التفعيل</td>
+                                                        <td>تايخ الإنشاء</td>
+                                                        <td>صفحة 1 من 1</td>
+                                                        <td>رقم المراجعة</td>
+                                                        <td>رقم المرجع</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>14.09.2023</td>
+                                                        <td>03.09.2023</td>
+                                                        <td>T005</td>
+                                                        <td>08</td>
+                                                        <td>QR.0011</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                        </div>  
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="action_po_report"
+                model="purchase.order"
+                name="allmed_print_report.po_report"
+                file="allmed_print_report.po_report"
+                string="امر التوريد"
+                report_type="qweb-pdf"/>
+
+
+    </data>
+</odoo>

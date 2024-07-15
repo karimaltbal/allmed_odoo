@@ -1,0 +1,246 @@
+<odoo>
+    <data>
+        <template id="rfq_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.basic_layout">
+                        <div class="page" style="font-size: 13px;">
+                            <!--link of style css-->
+                            <link rel="stylesheet" href="/allmed_print_report/static/src/css/style.css"/>
+
+
+                                <div class="row header" style="direction: rtl; font-size: 15px;">
+                                    <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table table table-bordered" style="text-align: right;">
+                                        <tbody>
+                                            <tr>
+                                            <td class="img-content" style="text-align: right; width:120px; padding: 2px;" rowspan="3">
+                                                <img style="width:120px; margin-top: 20%;" src="/allmed_print_report/static/src/img/allmed.png" alt="...loding"/>
+                                            </td>
+                                            <td style="padding: 2px;" colspan="2">شركة أولميد ميدل ايست</td>
+                                            </tr>
+                                            <tr>
+                                            <td style="padding: 2px;">القسم</td>
+                                            <td style="padding: 2px;">المشتريات</td>
+                                            </tr>
+                                            <tr>
+                                            <td style="padding: 2px;">نموذج</td>
+                                            <td style="padding: 2px;">طلب شراء</td>
+                                            </tr>
+                                        </tbody>
+                                        </table>
+
+                                        <p style="text-align: right;">
+                                        <span>الوثيقة المرتبطة</span>
+                                        WI.370
+                                        </p>
+                                    </div>
+                                    </div>
+                                </div>
+
+                            <!--Start Main Header Page -->
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div style="margin-left: 440px;">
+                                                        طلب شراء رقم (<span t-field="o.name"/>)  
+                                                    </div>
+                                                    <div>
+                                                        التاريخ: <span t-field="o.date_approve"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                <p style="margin-left: 380px;">من قسم / إدارة:
+                                                  .......................................
+                                                </p>
+                                                <p>الأصناف مطلوبة لقسم:
+                                                  .......................................
+                                                </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row" style="margin-bottom: 10px; height: 570px; font-size: 16px;">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table">
+                                            <tbody>
+                                                <tr style="padding: 2px;" class="t-b t-center">
+                                                    <td>م</td>
+                                                    <td>الصنف ومواصافته</td>
+                                                    <td>الوحدة</td>
+                                                    <td>الكمية المطلوبة </td>
+                                                    <td>رصيد المخازن </td>
+                                                    <td>ملاحظات</td>
+                                                </tr>
+
+                                                <t t-set="counter" t-value="1"/>
+                                                <t t-foreach="o.order_line" t-as="ele">
+                                                    <tr style="text-align: center;">
+                                                        <td t-esc="counter"/>
+                                                        <td>
+                                                            <span t-field="ele.product_id"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.product_uom"/>
+                                                        </td>
+                                                        <td style="padding: 2px;">
+                                                            <span t-field="ele.product_qty"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="ele.x_studio_qty_on_hand"/>
+                                                        </td>
+                                                        <td/>
+                                                    </tr>
+                                                    <t t-set="counter" t-value="counter + 1"/>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row " style="margin-bottom: 10px;">
+                                <div class="col-12">
+                                    <div class="main_header">
+                                        <table class="main-table">
+                                            <tbody>
+                                                <tr class="t-b t-center">
+                                                    <td>سبب الشراء:</td>
+                                                    <td>الرأى الفنى:</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td/>
+                                                    <td/>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>التوقيع</td>
+                                                    <td>التوقيع</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                            <div class="col-12">
+                                <div class="main_header">
+                                    <table class="main-table">
+                                        <tbody>
+                                            <tr class="t-b t-center">
+                                                <td>الاعتمادات</td>
+                                                <td>الإسم</td>
+                                                <td>التوقيع</td>
+                                                <td>التاريخ</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>رئيس / مدير القسم</td>
+                                                <td/>
+                                                <td/>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                                <td>مدير الإدارة</td>
+                                                <td/>
+                                                <td/>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                                <td>العضو المنتدب</td>
+                                                <td/>
+                                                <td/>
+                                                <td/>
+                                            </tr>
+                                            <tr>
+                                            <td>مدير المشتريات</td>
+                                            <td/>
+                                            <td/>
+                                            <td/>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <div class="row">
+                                        <p class="col-6">رقم أمر التوريد:
+                                        ...............
+                                        </p>
+                                        <p class="col-6">اسم الشركة الموردة:
+                                        ...............
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                                <div class="row footer" style="text-align: center;">
+                                    <div class="col-12">
+                                        <div class="main_header">
+                                            <table class="main-table table table-bordered">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>تاريخ التفعيل</td>
+                                                        <td>تايخ الإنشاء</td>
+                                                        <td>صفحة 1 من 1</td>
+                                                        <td>رقم المراجعة</td>
+                                                        <td>رقم المرجع</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>29.04.2024</td>
+                                                        <td>29.04.2024</td>
+                                                        <td>T005</td>
+                                                        <td>07</td>
+                                                        <td>QR.0001</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report
+                id="action_rfq_report"
+                model="purchase.order"
+                name="allmed_print_report.rfq_report"
+                file="allmed_print_report.rfq_report"
+                string="طلب شراء"
+                report_type="qweb-pdf"/>
+
+    </data>
+</odoo>
